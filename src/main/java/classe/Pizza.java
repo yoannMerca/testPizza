@@ -26,6 +26,13 @@ package classe;
 			this.price = price;
 			this.categorie = cat;
 		}
+		public Pizza(Pizza piz) {
+			this.idPizza = nbr++;
+			this.code = piz.getCode();
+			this.designation = piz.getDesignation();
+			this.price = piz.getPrice();
+			this.categorie = piz.getCategorie();
+		}
 		/**
 		 * 
 		 * @return retourne le code de la pizza

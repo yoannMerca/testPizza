@@ -130,7 +130,9 @@ public class PizzaMemDao implements IPizzaDao {
 			}if(piz.getPrice()> PRICE_MAX) {
 				message += "le prix de la pizza est trop grand, \n\r";
 			}if(piz.getPrice()< PRICE_MIN) {
-				message += "le prix de la pizza est trop grand, \n\r";
+				message += "le prix de la pizza est trop petit, \n\r";
+			}if(piz.getCategorie()==null) {
+				message += "la categorie est nulle, \n\r";
 			}
 		}
 		
