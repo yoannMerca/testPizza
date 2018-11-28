@@ -1,0 +1,85 @@
+#
+# Project specific excludes
+#
+
+tomcat
+
+#
+# Default excludes
+#
+
+# Binaries
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.war
+*.ear
+*.sar
+*.class
+
+# Maven 
+target/
+
+# IntelliJ project files 
+*.iml
+*.iws
+*.ipr
+.idea/
+
+doc/*
+# eclipse project file
+.settings/
+.classpath
+.project
+
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+doc/
+config/databases.yml
+cache/*
+log/*
+data/sql/*
+lib/filter/base/*
+lib/form/base/*
+lib/model/map/*
+lib/model/om/*
+
+
+# OS
+.DS_Store
+
+# Misc
+*.swp
+release.properties
+pom.xml.releaseBackup
+pom.xml.tag
+
+target/
+.project
+.classpath
+.settings/
+.svn/
+bin/
+
+# Intellij
+*.ipr
+*.iml
+.idea
+out/
+.DS_Store
+/bootstrap
+/dependencies.xml
+.java-version
+/javadoc-options-javadoc-resources.xml
+.checkstyle
