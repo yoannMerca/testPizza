@@ -15,72 +15,90 @@ public class TestUpdatePizza {
 	PizzaMemDao testMemDao = new PizzaMemDao();
 	ArrayList<Pizza> testAllPizzas = testMemDao.findAllPizzas();
 
+	/**Création de la liste de pizza pour les tests
+	 * Qui sera réinitiliser à chaque test
+	 */
 	@Before
 	public void setup() {
 		testMemDao = new PizzaMemDao();
 		testAllPizzas = testMemDao.findAllPizzas();
 	}
 
+	/**
+	 * Essaie de test, pour savoir si la pizza est bien null
+	 * si elle n'est pas initiliser.
+	 */
 	@Test
-
 	public void monPremierTest() {
 		Pizza piz = null;
 		assertNull("test si null", piz);
 	}
 
+	/**
+	 * Test pour savoir si la méthode testFindAllPizza renvoie bien un tableau
+	 * de Pizza non null.
+	 */
 	@Test
 	public void testFindAllPizza() {
 		assertNotNull("test si null findAllPizza retourne bien un tableau de type pizza non null", testAllPizzas);
 	}
 
-	@Test
-	public void testUpdatePizzaNullNull() {
-		try {
+	/**
+	 * @throws UpdatePizzaException est renvoyé car la pizza est nul
+	 * 
+	 */
+	@Test (expected = UpdatePizzaException.class)
+	public void testUpdatePizzaNullNull() throws UpdatePizzaException {
 			testMemDao.updatePizza(null, null);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
 	}
 
+	/**
+	 * testUpdatePizzaCodeNullTestException
+	 * @throws UpdatePizzaException renvoie une exception
+	 * l'ancien code est null.
+	 */
 	@Test(expected = UpdatePizzaException.class)
 	public void testUpdatePizzaCodeNullTestException() throws UpdatePizzaException {
 		Pizza piz = new Pizza("PLOP", "maPIzza", 12.5, CategoriePIzzaEnum.AUTRE);
 		testMemDao.updatePizza(null, piz);
 	}
 
+	/**
+	 * testUpdatePizzaPizzaNullTestException
+	 * @throws UpdatePizzaException est retrouné car la pizza est null
+	 */
 	@Test(expected = UpdatePizzaException.class)
 	public void testUpdatePizzaPizzaNullTestException() throws UpdatePizzaException {
 
 		testMemDao.updatePizza("PEP", null);
 	}
 
-	@Test
-	public void testUpdatePizzaPizzaNull() {
-		try {
-			Pizza piz = null;
-			testMemDao.updatePizza("PEP", piz);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+//	@Test
+//	public void testUpdatePizzaPizzaNull() {
+//		try {
+//			Pizza piz = null;
+//			testMemDao.updatePizza("PEP", piz);
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//
+//	}
 
-	}
-
-	@Test
-	public void testUpdatePizza() {
-		try {
+		/**
+		 * Création de la pizza effectué avec succès
+		 * @throws UpdatePizzaException est l'excpetion qui devrait être levé
+		 */
+	@Test (expected = Test.None.class)
+	public void testUpdatePizza() throws UpdatePizzaException {
 			Pizza piz = new Pizza("PLOP", "maPIzza", 18.2, CategoriePIzzaEnum.AUTRE);
 			testMemDao.updatePizza("PEP", piz);
-			System.out.println("pizz ajouté");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+
 
 	}
 
-	@Rule
-	public ExpectedException exception = ExpectedException.none();
-
+	/**
+	 * Test du message renvoyé par le DataControl si le prix de la pizza est trop grand
+	 */
 	@Test
 	public void testUpdatePizzaCodeNullTestExceptionPriceUP() {
 		Pizza piz = new Pizza("PLOP", "maPIzza", 820.2, CategoriePIzzaEnum.AUTRE);
@@ -93,6 +111,10 @@ public class TestUpdatePizza {
 		}
 
 	}
+	
+	/**
+	 * Test du message renvoyé par le DataControl si le prix de la pizza est trop petite
+	 */
 	@Test
 	public void testUpdatePizzaCodeNullTestExceptionPriceLow() {
 		Pizza piz = new Pizza("PLOP", "maPIzza", -820.2, CategoriePIzzaEnum.AUTRE);
@@ -106,6 +128,10 @@ public class TestUpdatePizza {
 
 	}
 
+	/**
+	 * Test du message renvoyé par le DataControl si le nouveau code de la pizza
+	 * est supérieur à 4 caractères
+	 */
 	@Test
 	public void testUpdatePizzaCodeNullTestExceptionCode() {
 		Pizza piz = new Pizza("PLOPYY", "maPIzza", 18.2, CategoriePIzzaEnum.AUTRE);
@@ -117,6 +143,10 @@ public class TestUpdatePizza {
 			System.out.println(e.getMessage());
 		}
 
+		/**
+		 * Test du message renvoyé par le DataControl pour indiquer que 
+		 * la catégorie est null
+		 */
 	}
 	@Test
 	public void testUpdatePizzaCodeNullTestExceptionCategorie() {
@@ -128,6 +158,12 @@ public class TestUpdatePizza {
 			assert (e.getMessage().contains("la categorie est nulle,"));
 			System.out.println(e.getMessage());
 		}
+		
+	/**
+	 * Création d'une secondz Liste, qui sera une copie de la liste des pizzas avant l'update
+	 * Update d'une pizza valide puis vérification si les deux listes ne sont pas 
+	 * identiques
+	 */
 	}
 	@Test
 	public void testUpdatePizzaCheckCollection() {
